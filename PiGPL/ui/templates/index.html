@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PiGPL — Compiler Pipeline Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">Pi</span>
+    <div class="brand-text">
+      <span class="brand-name">PiGPL</span>
+      <span class="brand-sub">Python-inspired General Purpose Language &middot; Compiler Design Lab</span>
+    </div>
+  </div>
+  <div class="phase-badge">Phase 1 Prototype</div>
+</header>
+
+<main class="layout">
+
+  <!-- ============ LEFT: source + stage rail ============ -->
+  <section class="left-pane">
+
+    <div class="panel editor-panel">
+      <div class="panel-head">
+        <h2>Source</h2>
+        <span class="hint">.pig</span>
+      </div>
+      <textarea id="source-input" spellcheck="false">let x: int = 10
+let y: int = 20
+let z: int = x + y
+
+if z > 20 {
+    print("Greater")
+} else {
+    print("Not greater")
+}
+</textarea>
+      <div class="editor-actions">
+        <select id="example-picker">
+          <option value="">Load example&hellip;</option>
+        </select>
+        <button id="compile-btn" class="compile-btn">Compile &amp; Analyze</button>
+      </div>
+      <p id="status-line" class="status-line"></p>
+    </div>
+
+    <nav class="panel stage-rail">
+      <div class="panel-head">
+        <h2>Pipeline stages</h2>
+      </div>
+      <ol id="stage-list">
+        <li data-stage="source">    <span class="n">1</span><span class="s">Source</span></li>
+        <li data-stage="lexical">   <span class="n">2</span><span class="s">Lexical Analysis</span></li>
+        <li data-stage="tokens">    <span class="n">3</span><span class="s">Tokens</span></li>
+        <li data-stage="syntax">    <span class="n">4</span><span class="s">Syntax Analysis</span></li>
+        <li data-stage="ast">       <span class="n">5</span><span class="s">AST</span></li>
+        <li data-stage="symbols">   <span class="n">6</span><span class="s">Symbol Table</span></li>
+        <li data-stage="semantic">  <span class="n">7</span><span class="s">Semantic Analysis</span></li>
+        <li data-stage="ir" class="planned">        <span class="n">8</span><span class="s">Intermediate Code</span><span class="tag">Planned</span></li>
+        <li data-stage="optimize" class="planned">  <span class="n">9</span><span class="s">Optimization</span><span class="tag">Planned</span></li>
+        <li data-stage="target" class="planned">    <span class="n">10</span><span class="s">Target Code</span><span class="tag">Planned</span></li>
+        <li data-stage="execution" class="planned"> <span class="n">11</span><span class="s">Execution</span><span class="tag">Planned</span></li>
+        <li data-stage="errors">    <span class="n">12</span><span class="s">Errors</span><span id="error-count" class="tag err-tag" hidden>0</span></li>
+        <li data-stage="pipeline">  <span class="n">&#8942;</span><span class="s">Full Pipeline Diagram</span></li>
+      </ol>
+    </nav>
+
+  </section>
+
+  <!-- ============ RIGHT: stage output ============ -->
+  <section class="panel output-panel">
+    <div class="panel-head">
+      <h2 id="output-title">Source</h2>
+    </div>
+    <div id="output-body" class="output-body">
+      <div class="empty-state">
+        <p>Write or load a PiGPL program, then click <strong>Compile &amp; Analyze</strong>.</p>
+        <p class="muted">Each stage of the pipeline will become inspectable here as soon as it runs.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <span>VIT Compiler Design Laboratory &middot; Individual Project &middot; PiGPL Phase 1</span>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

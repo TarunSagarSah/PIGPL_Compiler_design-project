@@ -299,9 +299,9 @@ PiGPL/
 │   ├── symbol_table.py
 │   ├── semantic.py
 │   ├── errors.py
-│   ├── ir.py            (Planned — Phase 2)
-│   ├── optimizer.py     (Planned — Phase 3)
-│   └── codegen.py       (Planned — Phase 3)
+│   ├── ir.py            
+│   ├── optimizer.py    
+│   └── codegen.py       
 ├── visualization/
 │   ├── __init__.py
 │   ├── token_view.py
